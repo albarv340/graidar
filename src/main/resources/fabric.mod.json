@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "graidar",
+  "version": "${version}",
+  "name": "graidar",
+  "description": "",
+  "authors": [],
+  "contact": {
+    "repo": "https://github.com/Albin/graidar"
+  },
+  "license": "MIT",
+  "icon": "assets/graidar/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "red.bread.graidar.client.GraidarClient"
+    ],
+    "main": [
+      "red.bread.graidar.Graidar"
+    ]
+  },
+  "mixins": [
+    "graidar.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "minecraft": "${minecraft_version}"
+  }
+}
