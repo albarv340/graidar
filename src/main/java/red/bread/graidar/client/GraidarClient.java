@@ -39,7 +39,7 @@ public class GraidarClient implements ClientModInitializer {
     }
 
     private static void tryLogRaidMessage(Text message) {
-        final String regex = "([A-Za-z0-9_ ]+?), ([A-Za-z0-9_ ]+?), ([A-Za-z0-9_ ]+?), and ([A-Za-z0-9_ ]+?) finished (.+?) and claimed (\\d+)x Aspects, (\\d+)x Emeralds, and \\+(\\d+) Seasonal Rating";
+        final String regex = "([A-Za-z0-9_ ]+?), ([A-Za-z0-9_ ]+?), ([A-Za-z0-9_ ]+?), and ([A-Za-z0-9_ ]+?) finished (.+?) and claimed (\\d+)x Aspects, (\\d+)x Emeralds, .(.+?m) Guild Experience, and \\+(\\d+) Seasonal Rating";
         String unformattedMessage = getUnformattedString(message.getString());
         Matcher matcher = Pattern.compile(regex, Pattern.MULTILINE).matcher(unformattedMessage);
         HashMap<String, List<String>> nameMap = new HashMap<>();
@@ -64,10 +64,11 @@ public class GraidarClient implements ClientModInitializer {
         String raid = matcher.group(5);
         String aspects = matcher.group(6);
         String emeralds = matcher.group(7);
-        String sr = matcher.group(8);
+        String xp = matcher.group(8);
+        String sr = matcher.group(9);
         if (MinecraftClient.getInstance().player != null) {
             final String data = String.format(
-                            "{`type`:`graid`,`timestamp`:%s,`message`:`%s`,`guild`:`%s`,`username`:`%s`,`user1`:`%s`,`user2`:`%s`,`user3`:`%s`,`user4`:`%s`,`raid`:`%s`,`aspects`:`%s`,`emeralds`:`%s`,`sr`:`%s`}",
+                            "{`type`:`graid`,`timestamp`:%s,`message`:`%s`,`guild`:`%s`,`username`:`%s`,`user1`:`%s`,`user2`:`%s`,`user3`:`%s`,`user4`:`%s`,`raid`:`%s`,`aspects`:`%s`,`emeralds`:`%s`,`xp`:`%s`,`sr`:`%s`}",
                             System.currentTimeMillis(),
                             unformattedMessage,
                             currentGuild,
@@ -79,6 +80,7 @@ public class GraidarClient implements ClientModInitializer {
                             raid,
                             aspects,
                             emeralds,
+                            xp,
                             sr
                     )
                     .replace('`', '"');
