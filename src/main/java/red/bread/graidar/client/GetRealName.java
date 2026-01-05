@@ -29,8 +29,8 @@ public class GetRealName {
         if (messageHasNickHover(message)) {
             HoverEvent hover = message.getStyle().getHoverEvent();
             if (hover == null) return;
-            if (hover.getValue(hover.getAction()) instanceof Text hoverText) {
-                final String regex = "(.*?)'s? real username is (.*)";
+            if (hover instanceof HoverEvent.ShowText(Text hoverText)) {
+                final String regex = "(.*?)'s? real name is (.*)";
                 Matcher matcher = Pattern.compile(regex, Pattern.MULTILINE).matcher(hoverText.getString());
                 if (!matcher.matches()) return;
                 String realName = matcher.group(2);
@@ -57,8 +57,8 @@ public class GetRealName {
     }
     public static boolean messageHasNickHover(Text message) {
         HoverEvent hover = message.getStyle().getHoverEvent();
-        if (hover != null && hover.getValue(hover.getAction()) instanceof Text hoverText) {
-            return hoverText.getString().contains("real username");
+            if (hover instanceof HoverEvent.ShowText(Text hoverText)) {
+            return hoverText.getString().contains("real name");
         }
         return false;
     }

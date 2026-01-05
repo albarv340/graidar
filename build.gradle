@@ -1,14 +1,14 @@
 plugins {
-    id 'fabric-loom' version '1.6-SNAPSHOT'
+    id 'fabric-loom' version '1.14-SNAPSHOT'
     id 'maven-publish'
 }
 
 version = "${project.mod_version}-${project.minecraft_version}"
 group = project.maven_group
 
-base {
-    archivesName = project.archives_base_name
-}
+//base {
+//    archivesName = project.archives_base_name
+//}
 
 repositories {
     // Add repositories to retrieve artifacts from in here.
@@ -62,17 +62,17 @@ java {
     withSourcesJar()
 }
 
-jar {
-    from("LICENSE") {
-        rename { "${it}_${project.archivesBaseName}"}
-    }
-}
+//jar {
+//    from("LICENSE") {
+//        rename { "${it}_${project.archivesBaseName}"}
+//    }
+//}
 
 // configure the maven publication
 publishing {
     publications {
         create("mavenJava", MavenPublication) {
-            artifactId = project.archives_base_name
+//            artifactId = project.archives_base_name
             from components.java
         }
     }
